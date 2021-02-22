@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
         
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -40,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime,crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
         
     }

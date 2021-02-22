@@ -4,61 +4,45 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed;
-    public Rigidbody2D rb;
+    public CharacterController2D controller;
+    public Animator animator;
+    public float runSpeed = 40f;
 
-    public Animator anim;
+    float horizontalMove = 0f;
+    bool jump = false;
+    bool crouch = false;
 
-    public float jumpForce = 20f;
-    public Transform feet;
-    public LayerMask groundLayers;
-
-    float mx;
     private void Update()
     {
-        mx = Input.GetAxisRaw("Horizontal");
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
+        if (Input.GetButtonDown("Jump"))
         {
-            Jump();
+            jump = true;
+            animator.SetBool("isJumping", true);
+            
         }
 
-        if (Mathf.Abs(mx) > 0.05f)
+        /*if (Input.GetButtonDown("Crouch"))
         {
-            anim.SetBool("isRunning", true);
-        }
-        else
+            crouch = true;
+        } else if (Input.GetButtonUp("Crouch"))
         {
-            anim.SetBool("isRunning", false);
-        }
+            crouch = false;
+        }*/
+    }
+    public void OnLanding()
+    {
+        animator.SetBool("isJumping", false);
         
-
-        anim.SetBool("isGrounded", isGrounded());
     }
 
     private void FixedUpdate()
     {
-        Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
-
-        rb.velocity = movement;
-    }
-
-    void Jump()
-    {
-        Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-
-        rb.velocity = movement;
-    }
-
-    public bool isGrounded()
-    {
-        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
-
-        if (groundCheck != null)
-        {
-            return true;
-        }
-
-        return false;
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        jump = false;
+        
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7563499049078307245}
   - component: {fileID: 7563499049078307244}
   - component: {fileID: 7563499049078307243}
+  - component: {fileID: -3937195998189719850}
   m_Layer: 0
   m_Name: Kunio
   m_TagString: Untagged
@@ -161,3 +162,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6d698c0b8294a42afeaee102a2c897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: -3937195998189719850}
+  animator: {fileID: 7563499049078307244}
+  runSpeed: 40
+--- !u!114 &-3937195998189719850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7563499049078307242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dec833f0ba85c240b4d30bdc85caa95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_JumpForce: 400
+  m_CrouchSpeed: 0.36
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  m_WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  m_GroundCheck: {fileID: 0}
+  m_CeilingCheck: {fileID: 0}
+  m_CrouchDisableCollider: {fileID: 0}
+  OnLandEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnCrouchEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CharacterController2D+BoolEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

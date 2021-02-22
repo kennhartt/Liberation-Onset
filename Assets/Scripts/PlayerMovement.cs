@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
+        
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump"))
@@ -25,13 +26,11 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        /*if (Input.GetButtonDown("Crouch"))
+        if (Input.GetKeyDown("x"))
         {
-            crouch = true;
-        } else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
-        }*/
+            animator.SetTrigger("Kick");
+        }
+        
     }
     public void OnLanding()
     {
@@ -41,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime,crouch, jump);
         jump = false;
         
     }
